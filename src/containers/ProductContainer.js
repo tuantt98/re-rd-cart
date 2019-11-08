@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import Products from '../components/Products'
 import Product from '../components/Product'
 import PropTypes from 'prop-types'
+import {actAddToCart, actChangeMessage} from '../actions/index'
 
 class ProductContainer extends Component {
 
@@ -11,6 +12,8 @@ class ProductContainer extends Component {
             <Product
             key={index}
             product={value}
+            onAddToCart={this.props.onAddToCart}
+            onChangeMessage = {this.props.onChangeMessage}
             >
             </Product> )  
     }
@@ -48,4 +51,15 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-export default connect(mapStateToProps, null)(ProductContainer)
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        onAddToCart: (product) => {
+            dispatch(actAddToCart(product,1))
+        },
+        onChangeMessage: (message)=>{
+            dispatch(actChangeMessage(message))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductContainer)

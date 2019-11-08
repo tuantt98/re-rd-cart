@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-
+import * as Message from '../constants/Message'
 export default class Product extends Component {
   
+
   showRating = (rating) => {
     
     let result = []
@@ -12,7 +13,11 @@ export default class Product extends Component {
       result.push(<i key={i+j} className="fa fa-star-o" />)
     }
     return result
-   
+  
+  }
+  onAddToCard = (product) => {
+    this.props.onAddToCart(product)
+    this.props.onChangeMessage(Message.MSG_ADD_TO_CART_SUCCESS)
   }
     render() {
       let {product} = this.props
@@ -42,7 +47,12 @@ export default class Product extends Component {
                     <div className="card-footer">
                       <span className="left">{product.price}$</span>
                       <span className="right">
-                        <a   className="btn-floating blue-gradient" title={"true"} data-toggle="tooltip" data-placement="top" title data-original-title="Add to Cart">
+                        <a  
+                          className="btn-floating blue-gradient"
+                          title={"true"} data-toggle="tooltip"
+                          data-placement="top" title data-original-title="Add to Cart"
+                          onClick = { ()=>  this.onAddToCard(product)}
+                          >
                           <i className="fa fa-shopping-cart"  />
                         </a>
                       </span>

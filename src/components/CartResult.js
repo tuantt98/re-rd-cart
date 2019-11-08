@@ -2,17 +2,9 @@ import React, { Component } from 'react'
 
 export default class CartResult extends Component {
 
-  showTotalAmount = (cart) => {
-    let total = 0;
-
-    if(cart.length >0){
-      total = cart.reduce( (x,y) => x.product.price*x.quantity + y.product.price * y.quantity)
-    }
-
-    return total
-  }
     render() {
-      let {cart} = this.props
+      let {total} = this.props
+      // console.log(total)
         return (
             <tr>
             <td colSpan={3} />
@@ -23,7 +15,7 @@ export default class CartResult extends Component {
             </td>
             <td>
               <h4>
-                <strong>{this.showTotalAmount(cart)}$</strong>
+                <strong>{total}$</strong>
               </h4>
             </td>
             <td colSpan={3}>
